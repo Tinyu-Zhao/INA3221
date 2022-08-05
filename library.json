@@ -1,0 +1,16 @@
+{
+  "name": "INA3221",
+  "description": "Library for INA3221 Chip",
+  "keywords": "INA3221 current and voltage sensor",
+  "authors": {
+    "name": "Tinyu",
+    "url": "https://github.com/Tinyu-Zhao"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tinyu-Zhao/INA3221.git"
+  },
+  "version": "0.0.1",
+  "frameworks": "arduino",
+  "platforms": "espressif32"
+}
