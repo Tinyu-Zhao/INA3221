@@ -414,8 +414,8 @@ int32_t INA3221::getShuntVoltage(ina3221_ch_t channel) {
 
     _read(reg, &val_raw);
 
-    // 1 LSB = 5uV
-    res = (int16_t)val_raw * 5;
+    // 1 LSB = 40uV
+    res = (int32_t)(val_raw >> 3) * 40;
 
     return res;
 }
@@ -474,7 +474,7 @@ float INA3221::getCurrent(ina3221_ch_t channel) {
     float current_A  = 0;
 
     shunt_uV  = getShuntVoltage(channel);
-    current_A = shunt_uV / (int32_t)_shuntRes[channel] / 1000.0;
+    current_A = shunt_uV / 1000.0 / (int32_t)_shuntRes[channel];
     return current_A;
 }
 
