@@ -398,7 +398,7 @@ void INA3221::setCurrentSumDisable(ina3221_ch_t channel) {
 int32_t INA3221::getShuntVoltage(ina3221_ch_t channel) {
     int32_t res;
     ina3221_reg_t reg;
-    uint16_t val_raw = 0;
+    int16_t val_raw = 0;
 
     switch (channel) {
         case INA3221_CH1:
@@ -414,8 +414,9 @@ int32_t INA3221::getShuntVoltage(ina3221_ch_t channel) {
 
     _read(reg, &val_raw);
 
+    // instead of bit-shifting, (which would break the signed integer signing,) divide by 8 to remove the (reserved) last 3 least-significant bits
     // 1 LSB = 40uV
-    res = (int32_t)(val_raw >> 3) * 40;
+    res = (int32_t)(val_raw / 8) * 40;
 
     return res;
 }
